@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+'''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Use 'kde-open' to load those pesky Windows .url files in your default web browser.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Reason: While Wine's rundll32 appears to do pretty much the same thing, it
+takes an unreasonably long time to launch on my system for some odd reason.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Installation: Place this script somewhere on your system path, mark it as
+executable, and set it as the default app to launch .url files.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Author: Bavarin Fleetfoot
+License: Public Domain
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'''
+if __name__ == '__main__':
+    import sys
+    import ConfigParser
+    from subprocess import call
+
+    urlfile = sys.argv[1]
+    parser = ConfigParser.SafeConfigParser()
+    parser.read(urlfile)
+    sys.exit(call(['kde-open', parser.get('InternetShortcut', 'URL')]))
